@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>V.S GLOW - Admin Dashboard</title>
+
+<style>
+
+:root {
+
+--primary-burgundy: #6b0526;
+
+--dark-burgundy: #400216;
+
+--gold-main: #d4af37;
+
+--gold-light: #ffe89c;
+
+--bg-light: #f4f6f8;
+
+}
+
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+
+body { background: var(--bg-light); color: #333; padding-bottom: 40px; }
+
+
+header {
+
+background: linear-gradient(135deg, var(--dark-burgundy), var(--primary-burgundy));
+
+color: var(--gold-light);
+
+padding: 1.2rem 1rem;
+
+text-align: center;
+
+border-bottom: 3px solid var(--gold-main);
+
+position: relative;
+
+}
+
+
+.logout-btn {
+
+position: absolute;
+
+right: 15px;
+
+top: 50%;
+
+transform: translateY(-50%);
+
+background: #ef4444;
+
+color: white;
+
+border: none;
+
+padding: 6px 12px;
+
+border-radius: 6px;
+
+font-weight: bold;
+
+cursor: pointer;
+
+font-size: 0.85rem;
+
+}
+
+
+.container { max-width: 950px; margin: 20px auto; padding: 0 15px; display: none; }
+
+
+.adm-card {
+
+background: white;
+
+border-radius: 12px;
+
+padding: 20px;
+
+margin-bottom: 25px;
+
+box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+
+border: 1px solid #e2e8f0;
+
+}
+
+
+.adm-card h2 {
+
+color: var(--primary-burgundy);
+
+font-size: 1.25rem;
+
+border-bottom: 2px solid var(--gold-light);
+
+padding-bottom: 8px;
+
+margin-bottom: 15px;
+
+font-family: 'Georgia', serif;
+
+}
+
+
+.form-group { margin-bottom: 12px; }
+
+.form-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px; color: var(--primary-burgundy); }
+
+
+.form-grid {
+
+display: grid;
+
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+gap: 15px;
+
+margin-bottom: 15px;
+
+}
+
+
+input[type="text"], input[type="number"], textarea, input[type="file"] {
+
+width: 100%;
+
+padding: 9px;
+
+border: 1px solid #cbd5e1;
+
+border-radius: 6px;
+
+outline: none;
+
+font-size: 0.9rem;
+
+background: #fff;
+
+}
+
+
+input:focus, textarea:focus { border-color: var(--gold-main); }
+
+
+.img-input-box {
+
+background: #fafafa;
+
+border: 1px dashed #cbd5e1;
+
+padding: 10px;
+
+border-radius: 8px;
+
+margin-bottom: 10px;
+
+}
+
+.or-divider { text-align: center; font-size: 0.75rem; color: #888; margin: 4px 0; font-weight: bold; }
+
+
+.btn-save {
+
+background: var(--primary-burgundy);
+
+color: var(--gold-light);
+
+border: 1px solid var(--gold-main);
+
+padding: 10px 20px;
+
+border-radius: 6px;
+
+font-weight: bold;
+
+cursor: pointer;
+
+transition: 0.2s;
+
+}
+
+.btn-save:hover { opacity: 0.9; }
+
+
+.btn-edit {
+
+background: var(--gold-main);
+
+color: #000;
+
+border: none;
+
+padding: 5px 10px;
+
+border-radius: 4px;
+
+cursor: pointer;
+
+font-size: 0.8rem;
+
+font-weight: bold;
+
+margin-right: 4px;
+
+}
+
+
+.btn-del {
+
+background: #ef4444;
+
+color: white;
+
+border: none;
+
+padding: 5px 10px;
+
+border-radius: 4px;
+
+cursor: pointer;
+
+font-size: 0.8rem;
+
+}
+
+
+.btn-cancel {
+
+background: #64748b;
+
+color: white;
+
+border: none;
+
+padding: 10px 15px;
+
+border-radius: 6px;
+
+font-weight: bold;
+
+cursor: pointer;
+
+display: none;
+
+margin-left: 8px;
+
+}
+
+
+table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+
+th, td { border: 1px solid #f1f5f9; padding: 10px; text-align: left; font-size: 0.9rem; }
+
+th { background: #f8fafc; color: var(--primary-burgundy); }
+
+.img-preview { width: 45px; height: 45px; object-fit: cover; border-radius: 6px; }
+
+
+.gallery-preview-grid {
+
+display: grid;
+
+grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+
+gap: 12px;
+
+margin-top: 15px;
+
+}
+
+.gallery-item-box { position: relative; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; }
+
+.gallery-item-box img { width: 100%; height: 85px; object-fit: cover; }
+
+.gallery-item-box button {
+
+position: absolute;
+
+top: 3px; right: 3px;
+
+background: rgba(239, 68, 68, 0.9);
+
+color: white; border: none; border-radius: 50%;
+
+width: 22px; height: 22px; cursor: pointer; font-size: 11px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+<h1>V.S GLOW - Admin Dashboard</h1>
+
+<button class="logout-btn" onclick="logoutAdmin()">लॉगआउट</button>
+
+</header>
+
+
+<div class="container" id="adminMainContainer">
+
+
+<!-- 0. Service Booking Requests Table (New Added) -->
+
+<div class="adm-card" style="border: 2px solid var(--primary-burgundy);">
+
+<h2>📋 0. कस्टमर बुकिंग रिक्वेस्ट (Service Bookings)</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>तारीख</th>
+
+<th>ग्राहक का नाम</th>
+
+<th>मोबाइल नंबर</th>
+
+<th>चुनी गई सर्विस</th>
+
+<th>एक्शन</th>
+
+</tr>
+
+</thead>
+
+<tbody id="bookingListTable"></tbody>
+
+</table>
+
+</div>
+
+
+<!-- 1. Header, Logo & Top Banner Control -->
+
+<div class="adm-card">
+
+<h2>✦ 1. हेडर, लोगो और टॉप बैनर (Header, Logo & Banner)</h2>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>सैलून का नाम:</label>
+
+<input type="text" id="cfgTitle" placeholder="Ex: V.S GLOW BEAUTY SALON">
+
+</div>
+
+<div class="form-group">
+
+<label>टैगलाइन:</label>
+
+<input type="text" id="cfgTagline" placeholder="Ex: Aapki Khubsurati, Hamari Pehchan">
+
+</div>
+
+<div class="form-group">
+
+<label>टॉप अनाउंसमेंट बैनर:</label>
+
+<input type="text" id="cfgBanner" placeholder="Ex: 🎉 Flat 20% OFF on all Facials!">
+
+</div>
+
+</div>
+
+
+<div class="img-input-box">
+
+<label style="font-weight:bold; font-size:0.85rem; color:var(--primary-burgundy);">सैलून लोगो बदलें (Choose Logo):</label>
+
+<input type="file" id="cfgLogoFile" accept="image/*">
+
+<div class="or-divider">── या लोगो का लिंक (URL) डालें ──</div>
+
+<input type="text" id="cfgLogoUrl" placeholder="https://example.com/logo.png">
+
+</div>
+
+
+<button class="btn-save" onclick="saveHeaderConfig()">हेडर और लोगो सेव करें</button>
+
+</div>
+
+
+<!-- 2. Services, Offer Rates & Service Offer Banner -->
+
+<div class="adm-card">
+
+<h2>✦ 2. सेवाएं, ऑफर रेट और स्पेशल ऑफर बैनर</h2>
+
+
+<div style="background: #fdf8e6; padding: 12px; border-radius: 8px; border: 1px solid var(--gold-main); margin-bottom: 18px;">
+
+<label style="font-weight: bold; color: var(--primary-burgundy); font-size: 0.9rem;">सर्विस सेक्शन ऑफर बैनर टेक्स्ट:</label>
+
+<div style="display: flex; gap: 10px; margin-top: 6px;">
+
+<input type="text" id="serviceOfferBannerText" placeholder="Ex: 🪔 Durga Pooja Special Offer: Hurry Up & Book Today! 🏃‍♀️">
+
+<button class="btn-save" style="white-space: nowrap;" onclick="saveServiceBanner()">बैनर अपडेट करें</button>
+
+</div>
+
+</div>
+
+
+<h3 id="formServiceTitle" style="color: var(--primary-burgundy); font-size: 1rem; margin-bottom: 10px;">नई सर्विस जोड़ें / एडिट करें:</h3>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>सर्विस का नाम:</label>
+
+<input type="text" id="sName" placeholder="Ex: Gold Facial">
+
+</div>
+
+<div class="form-group">
+
+<label>ऑफर रेट (₹):</label>
+
+<input type="number" id="sPrice" placeholder="Ex: 499">
+
+</div>
+
+</div>
+
+
+<div class="img-input-box">
+
+<label style="font-weight:bold; font-size:0.85rem; color:var(--primary-burgundy);">सर्विस फोटो चुनें:</label>
+
+<input type="file" id="sFile" accept="image/*">
+
+<div class="or-divider">── या फोटो लिंक (URL) डालें ──</div>
+
+<input type="text" id="sUrl" placeholder="https://example.com/photo.jpg">
+
+</div>
+
+
+<button class="btn-save" id="btnServiceSubmit" onclick="saveService()">+ नई सर्विस जोड़ें</button>
+
+<button class="btn-cancel" id="btnServiceCancel" onclick="cancelServiceEdit()">कैंसल एडिट</button>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>फोटो</th>
+
+<th>नाम</th>
+
+<th>ऑफर रेट</th>
+
+<th>एक्शन</th>
+
+</tr>
+
+</thead>
+
+<tbody id="serviceListTable"></tbody>
+
+</table>
+
+</div>
+
+
+<!-- 3. Photo Gallery -->
+
+<div class="adm-card">
+
+<h2>✦ 3. फोटो गैलरी (Photo Gallery)</h2>
+
+<div class="img-input-box">
+
+<label style="font-weight:bold; font-size:0.85rem; color:var(--primary-burgundy);">गैलरी फोटो चुनें:</label>
+
+<input type="file" id="gFile" accept="image/*">
+
+<div class="or-divider">── या फोटो लिंक (URL) डालें ──</div>
+
+<input type="text" id="gUrl" placeholder="https://example.com/gallery.jpg">
+
+</div>
+
+<button class="btn-save" onclick="addPhoto()">+ गैलरी में जोड़ें</button>
+
+
+<div class="gallery-preview-grid" id="galleryPreviewBox"></div>
+
+</div>
+
+
+<!-- 4. Customer Reviews -->
+
+<div class="adm-card">
+
+<h2>✦ 4. कस्टमर रिव्यू (Customer Reviews)</h2>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>कस्टमर का नाम:</label>
+
+<input type="text" id="rName" placeholder="Ex: Puja Sharma">
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label>रिव्यू:</label>
+
+<textarea id="rText" rows="2" placeholder="कस्टमर की समीक्षा लिखें..."></textarea>
+
+</div>
+
+
+<div class="img-input-box">
+
+<label style="font-weight:bold; font-size:0.85rem; color:var(--primary-burgundy);">कस्टमर फोटो (Optional):</label>
+
+<input type="file" id="rFile" accept="image/*">
+
+<div class="or-divider">── या फोटो लिंक (URL) डालें ──</div>
+
+<input type="text" id="rUrl" placeholder="https://example.com/user.jpg">
+
+</div>
+
+
+<button class="btn-save" onclick="addReview()">+ रिव्यू जोड़ें</button>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>फोटो</th>
+
+<th>नाम</th>
+
+<th>रिव्यू</th>
+
+<th>एक्शन</th>
+
+</tr>
+
+</thead>
+
+<tbody id="reviewListTable"></tbody>
+
+</table>
+
+</div>
+
+
+<!-- 5. Salon Details -->
+
+<div class="adm-card">
+
+<h2>✦ 5. सैलून की जानकारी (Salon Details)</h2>
+
+<div class="form-grid">
+
+<div class="form-group"><label>पता (Address):</label><input type="text" id="infoAddress"></div>
+
+<div class="form-group"><label>समय (Timings):</label><input type="text" id="infoTiming"></div>
+
+<div class="form-group"><label>फोन नंबर:</label><input type="text" id="infoPhone"></div>
+
+<div class="form-group"><label>व्हाट्सएप नंबर:</label><input type="text" id="infoWA"></div>
+
+<div class="form-group"><label>इंस्टाग्राम लिंक:</label><input type="text" id="infoInsta"></div>
+
+<div class="form-group"><label>फेसबुक लिंक:</label><input type="text" id="infoFB"></div>
+
+<div class="form-group"><label>गूगल मैप्स लिंक:</label><input type="text" id="infoMap"></div>
+
+</div>
+
+<button class="btn-save" onclick="saveSalonInfo()">सैलून डिटेल्स सेव करें</button>
+
+</div>
+
+
+</div>
+
+
+<script>
+// ==========================================
+// 🚀 GITHUB AUTO-SAVE CONFIGURATION
+// ==========================================
+// यहाँ अपनी GitHub डिटेल्स डालें:
+const GITHUB_USERNAME = "अपना_गिटहब_यूजरनेम_यहाँ_लिखें"; // उदाहरण: "vikash123"
+const GITHUB_REPO = "अपने_प्रोजेक्ट_का_नाम_यहाँ_लिखें"; // उदाहरण: "vsglow-salon"
+const GITHUB_TOKEN = "अपना_गिटहब_टोकन_यहाँ_पेस्ट_करें"; // उदाहरण: "ghp_xxxxxxxxxxx"
+const BRANCH_NAME = "main"; // अगर आपकी ब्रांच master है तो इसे "master" कर दें
+// ==========================================
+
+
+const ADMIN_PASSWORD = "glow@123";
+let globalSalonData = {
+header: {}, serviceBanner: "", services: [], photos: [], reviews: [], info: {}, bookings: []
+};
+
+
+function checkPassword() {
+
+const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+
+if (isLoggedIn === 'true') {
+
+document.getElementById('adminMainContainer').style.display = 'block';
+
+return true;
+
+}
+
+
+const userPass = prompt("🔐 सुरक्षा के लिए एडमिन पासवर्ड दर्ज करें:");
+
+if (userPass === ADMIN_PASSWORD) {
+
+sessionStorage.setItem('adminLoggedIn', 'true');
+
+document.getElementById('adminMainContainer').style.display = 'block';
+
+return true;
+
+} else {
+
+alert("❌ गलत पासवर्ड! एक्सेस अस्वीकृत।");
+
+document.body.innerHTML = `<h2 style="text-align:center; color:#ef4444; margin-top:80px;">Access Denied! गलत पासवर्ड।</h2>`;
+
+return false;
+
+}
+
+}
+
+
+function logoutAdmin() {
+
+sessionStorage.removeItem('adminLoggedIn');
+
+location.reload();
+
+}
+
+
+let currentEditServiceIndex = null;
+
+
+function resolveImage(fileInputId, urlInputId) {
+
+return new Promise((resolve) => {
+
+const fileInput = document.getElementById(fileInputId);
+
+const urlInput = document.getElementById(urlInputId);
+
+
+if (fileInput && fileInput.files && fileInput.files[0]) {
+
+const reader = new FileReader();
+
+reader.onload = function(e) { resolve(e.target.result); };
+
+reader.readAsDataURL(fileInput.files[0]);
+
+} else if (urlInput && urlInput.value.trim() !== '') {
+
+resolve(urlInput.value.trim());
+
+} else {
+
+resolve('');
+
+}
+
+});
+
+}
+
+
+async function loadDataFromSource() {
+
+try {
+
+const res = await fetch('data.json?v=' + Date.now());
+
+if (res.ok) {
+
+globalSalonData = await res.json();
+
+localStorage.setItem('vsGlowData', JSON.stringify(globalSalonData));
+
+} else {
+
+const local = localStorage.getItem('vsGlowData');
+
+if (local) globalSalonData = JSON.parse(local);
+
+}
+
+} catch(e) {
+
+const local = localStorage.getItem('vsGlowData');
+
+if (local) globalSalonData = JSON.parse(local);
+
+}
+
+renderAdminUI();
+
+}
+
+
+function getData() {
+
+return globalSalonData;
+
+}
+
+// ** MAIN CHANGE HERE: Calling AutoSave to GitHub **
+function saveData(data) {
+
+globalSalonData = data;
+
+localStorage.setItem('vsGlowData', JSON.stringify(data));
+
+renderAdminUI();
+
+autoSaveToGitHub(data); 
+
+}
+
+// ** AUTOMATIC GITHUB UPLOAD FUNCTION **
+async function autoSaveToGitHub(data) {
+    if(!GITHUB_TOKEN || GITHUB_TOKEN === "अपना_गिटहब_टोकन_यहाँ_पेस्ट_करें") {
+        alert("⚠️ गिटहब टोकन सेट नहीं है! वेबसाइट पर डाटा अपडेट नहीं होगा। कृपया एडमिन कोड के टॉप पर अपना Username, Repo Name और Token डालें।");
+        return;
+    }
+
+    document.body.style.cursor = "wait"; // Loading...
+
+    try {
+        const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/data.json`;
+
+        // 1. Get existing file SHA (Update karne ke liye GitHub ko pichli file ka SHA chahiye hota hai)
+        let sha = '';
+        const getRes = await fetch(url, { headers: { 'Authorization': `token ${GITHUB_TOKEN}` } });
+        if (getRes.ok) {
+            const fileData = await getRes.json();
+            sha = fileData.sha;
+        }
+
+        // 2. Prepare Data (Hindi texts/emojis ke liye Safe Base64)
+        const jsonStr = JSON.stringify(data, null, 2);
+        const encodedContent = window.btoa(unescape(encodeURIComponent(jsonStr)));
+
+        // 3. Upload/Commit directly to GitHub
+        const bodyData = {
+            message: "Auto-updated website data from Admin Dashboard 🚀",
+            content: encodedContent,
+            branch: BRANCH_NAME
+        };
+        if (sha) bodyData.sha = sha;
+
+        const putRes = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${GITHUB_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bodyData)
+        });
+
+        if (putRes.ok) {
+            alert("✅ वेबसाइट का डेटा सफलतापूर्वक GitHub पर ऑटोमैटिक सेव हो गया है!\n\n(ध्यान दें: वेबसाइट पर बदलाव दिखने में 1 से 2 मिनट का समय लगता है।)");
+        } else {
+            const errorData = await putRes.json();
+            alert("❌ डेटा अपलोड फेल हो गया: " + errorData.message);
+        }
+    } catch (error) {
+        alert("❌ सिस्टम एरर: " + error.message);
+    } finally {
+        document.body.style.cursor = "default";
+    }
+}
+
+
+function renderAdminUI() {
+
+const data = getData();
+
+
+// 0. Bookings Table
+
+const bTable = document.getElementById('bookingListTable');
+
+if(!data.bookings || data.bookings.length === 0) {
+
+bTable.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#888;">अभी तक कोई नई बुकिंग नहीं आई है।</td></tr>`;
+
+} else {
+
+bTable.innerHTML = data.bookings.map((b, idx) => `
+
+<tr>
+
+<td style="font-size:0.75rem; color:#666;">${b.date || 'N/A'}</td>
+
+<td><strong>${b.name}</strong></td>
+
+<td><a href="tel:${b.phone}" style="color:var(--primary-burgundy); font-weight:bold;">${b.phone}</a></td>
+
+<td><span style="background:#fef2f2; color:var(--primary-burgundy); padding:3px 8px; border-radius:4px; font-weight:bold;">${b.service}</span></td>
+
+<td><button class="btn-del" onclick="deleteBooking(${idx})">हटाएं</button></td>
+
+</tr>
+
+`).join('');
+
+}
+
+
+// Header & Logo Config
+
+if(data.header) {
+
+document.getElementById('cfgTitle').value = data.header.title || '';
+
+document.getElementById('cfgTagline').value = data.header.tagline || '';
+
+document.getElementById('cfgBanner').value = data.header.banner || '';
+
+}
+
+
+// Service Offer Banner
+
+document.getElementById('serviceOfferBannerText').value = data.serviceBanner || '';
+
+
+// Services Table
+
+const sTable = document.getElementById('serviceListTable');
+
+if(!data.services || data.services.length === 0) {
+
+sTable.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#888;">कोई सर्विस मौजूद नहीं है।</td></tr>`;
+
+} else {
+
+sTable.innerHTML = data.services.map((s, idx) => `
+
+<tr>
+
+<td><img src="${s.image || 'https://via.placeholder.com/45'}" class="img-preview"></td>
+
+<td><strong>${s.name}</strong></td>
+
+<td>₹${s.price}</td>
+
+<td>
+
+<button class="btn-edit" onclick="editService(${idx})">एडिट</button>
+
+<button class="btn-del" onclick="deleteService(${idx})">डिलीट</button>
+
+</td>
+
+</tr>
+
+`).join('');
+
+}
+
+
+// Photo Gallery Preview
+
+const gBox = document.getElementById('galleryPreviewBox');
+
+if(!data.photos || data.photos.length === 0) {
+
+gBox.innerHTML = `<p style="grid-column: 1/-1; color: #888;">कोई फोटो मौजूद नहीं है।</p>`;
+
+} else {
+
+gBox.innerHTML = data.photos.map((p, idx) => `
+
+<div class="gallery-item-box">
+
+<img src="${p}">
+
+<button onclick="deletePhoto(${idx})">✕</button>
+
+</div>
+
+`).join('');
+
+}
+
+
+// Reviews Table
+
+const rTable = document.getElementById('reviewListTable');
+
+if(!data.reviews || data.reviews.length === 0) {
+
+rTable.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#888;">कोई रिव्यू मौजूद नहीं है।</td></tr>`;
+
+} else {
+
+rTable.innerHTML = data.reviews.map((r, idx) => `
+
+<tr>
+
+<td><img src="${r.photo || 'https://via.placeholder.com/45'}" class="img-preview"></td>
+
+<td><strong>${r.name}</strong></td>
+
+<td>"${r.text}"</td>
+
+<td><button class="btn-del" onclick="deleteReview(${idx})">डिलीट</button></td>
+
+</tr>
+
+`).join('');
+
+}
+
+
+// Salon Info Inputs
+
+if(data.info) {
+
+document.getElementById('infoAddress').value = data.info.address || '';
+
+document.getElementById('infoTiming').value = data.info.timing || '';
+
+document.getElementById('infoPhone').value = data.info.phone || '';
+
+document.getElementById('infoWA').value = data.info.wa || '';
+
+document.getElementById('infoInsta').value = data.info.insta || '';
+
+document.getElementById('infoFB').value = data.info.fb || '';
+
+document.getElementById('infoMap').value = data.info.map || '';
+
+}
+
+}
+
+
+function deleteBooking(idx) {
+
+if(confirm("क्या आप इस बुकिंग रिक्वेस्ट को डिलीट करना चाहते हैं?")) {
+
+const data = getData();
+
+data.bookings.splice(idx, 1);
+
+saveData(data);
+
+}
+
+}
+
+
+async function saveHeaderConfig() {
+
+const data = getData();
+
+const newLogo = await resolveImage('cfgLogoFile', 'cfgLogoUrl');
+
+
+data.header = {
+
+title: document.getElementById('cfgTitle').value.trim(),
+
+tagline: document.getElementById('cfgTagline').value.trim(),
+
+banner: document.getElementById('cfgBanner').value.trim(),
+
+logo: newLogo || (data.header ? data.header.logo : '')
+
+};
+
+
+saveData(data);
+
+document.getElementById('cfgLogoUrl').value = '';
+
+document.getElementById('cfgLogoFile').value = '';
+
+}
+
+
+function saveServiceBanner() {
+
+const data = getData();
+
+data.serviceBanner = document.getElementById('serviceOfferBannerText').value.trim();
+
+saveData(data);
+
+}
+
+
+async function saveService() {
+
+const name = document.getElementById('sName').value.trim();
+
+const price = document.getElementById('sPrice').value.trim();
+
+const newImage = await resolveImage('sFile', 'sUrl');
+
+
+if(!name || !price) return alert("कृपया सर्विस का नाम और ऑफर रेट भरें!");
+
+
+const data = getData();
+
+if(!data.services) data.services = [];
+
+
+if(currentEditServiceIndex !== null) {
+
+const existingImg = data.services[currentEditServiceIndex].image || '';
+
+data.services[currentEditServiceIndex] = { name, price, image: newImage || existingImg };
+
+} else {
+
+data.services.push({ name, price, image: newImage });
+
+}
+
+
+saveData(data);
+
+cancelServiceEdit();
+
+}
+
+
+function editService(idx) {
+
+const data = getData();
+
+const s = data.services[idx];
+
+if(!s) return;
+
+
+currentEditServiceIndex = idx;
+
+document.getElementById('sName').value = s.name;
+
+document.getElementById('sPrice').value = s.price;
+
+document.getElementById('sUrl').value = s.image || '';
+
+document.getElementById('formServiceTitle').innerText = "✏️ सर्विस संपादित करें:";
+
+document.getElementById('btnServiceSubmit').innerText = "✓ अपडेट करें";
+
+document.getElementById('btnServiceCancel').style.display = "inline-block";
+
+}
+
+
+function cancelServiceEdit() {
+
+currentEditServiceIndex = null;
+
+document.getElementById('sName').value = '';
+
+document.getElementById('sPrice').value = '';
+
+document.getElementById('sUrl').value = '';
+
+document.getElementById('sFile').value = '';
+
+document.getElementById('formServiceTitle').innerText = "नई सर्विस जोड़ें / एडिट करें:";
+
+document.getElementById('btnServiceSubmit').innerText = "+ नई सर्विस जोड़ें";
+
+document.getElementById('btnServiceCancel').style.display = "none";
+
+}
+
+
+function deleteService(idx) {
+
+if(confirm("क्या आप इस सर्विस को हटाना चाहते हैं?")) {
+
+const data = getData();
+
+data.services.splice(idx, 1);
+
+saveData(data);
+
+cancelServiceEdit();
+
+}
+
+}
+
+
+async function addPhoto() {
+
+const image = await resolveImage('gFile', 'gUrl');
+
+if(!image) return alert("कृपया फोटो चुनें या लिंक डालें!");
+
+
+const data = getData();
+
+if(!data.photos) data.photos = [];
+
+data.photos.push(image);
+
+saveData(data);
+
+
+document.getElementById('gUrl').value = '';
+
+document.getElementById('gFile').value = '';
+
+}
+
+
+function deletePhoto(idx) {
+
+const data = getData();
+
+data.photos.splice(idx, 1);
+
+saveData(data);
+
+}
+
+
+async function addReview() {
+
+const name = document.getElementById('rName').value.trim();
+
+const text = document.getElementById('rText').value.trim();
+
+const photo = await resolveImage('rFile', 'rUrl');
+
+
+if(!name || !text) return alert("नाम और रिव्यू दोनों भरें!");
+
+
+const data = getData();
+
+if(!data.reviews) data.reviews = [];
+
+data.reviews.push({ name, text, photo });
+
+saveData(data);
+
+
+document.getElementById('rName').value = '';
+
+document.getElementById('rText').value = '';
+
+document.getElementById('rUrl').value = '';
+
+document.getElementById('rFile').value = '';
+
+}
+
+
+function deleteReview(idx) {
+
+const data = getData();
+
+data.reviews.splice(idx, 1);
+
+saveData(data);
+
+}
+
+
+function saveSalonInfo() {
+
+const data = getData();
+
+data.info = {
+
+address: document.getElementById('infoAddress').value.trim(),
+
+timing: document.getElementById('infoTiming').value.trim(),
+
+phone: document.getElementById('infoPhone').value.trim(),
+
+wa: document.getElementById('infoWA').value.trim(),
+
+insta: document.getElementById('infoInsta').value.trim(),
+
+fb: document.getElementById('infoFB').value.trim(),
+
+map: document.getElementById('infoMap').value.trim()
+
+};
+
+saveData(data);
+
+}
+
+
+window.onload = function() {
+
+if (checkPassword()) {
+
+loadDataFromSource();
+
+}
+
+};
+
+</script>
+
+</body>
+
+</html>

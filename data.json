@@ -1,0 +1,34 @@
+{
+  "header": {
+    "title": "V.S GLOW BEAUTY SALON",
+    "tagline": "Aapki Khubsurati, Hamari Pehchan",
+    "banner": "🎉 Flat 20% OFF on all Facials!",
+    "logo": ""
+  },
+  "serviceBanner": "🪔 Special Offer: Hurry Up & Book Today! 🏃‍♀️",
+  "services": [
+    {
+      "name": "Gold Facial",
+      "price": "499",
+      "image": "https://via.placeholder.com/150"
+    }
+  ],
+  "photos": [],
+  "reviews": [
+    {
+      "name": "Puja Sharma",
+      "text": "Bahut acchi service hai!",
+      "photo": ""
+    }
+  ],
+  "info": {
+    "address": "Main Road, Near City Center",
+    "timing": "10:00 AM - 08:00 PM",
+    "phone": "9876543210",
+    "wa": "9876543210",
+    "insta": "",
+    "fb": "",
+    "map": ""
+  },
+  "bookings": []
+}

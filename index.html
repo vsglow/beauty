@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>V.S GLOW BEAUTY SALON</title>
+
+<style>
+
+:root {
+
+--primary-burgundy: #6b0526;
+
+--dark-burgundy: #400216;
+
+--gold-main: #d4af37;
+
+--gold-light: #ffe89c;
+
+--gold-glow: #f7dcd8;
+
+--bg-nude: #fffdf9;
+
+--card-bg: #ffffff;
+
+--text-dark: #2a2223;
+
+}
+
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+
+body { background-color: var(--bg-nude); color: var(--text-dark); line-height: 1.6; padding-bottom: 2rem; overflow-x: hidden; }
+
+
+/* Floating WhatsApp Icon */
+
+.floating-wa {
+
+position: fixed;
+
+bottom: 20px;
+
+right: 20px;
+
+width: 55px;
+
+height: 55px;
+
+background: #25d366;
+
+color: white;
+
+border-radius: 50%;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+
+z-index: 9999;
+
+text-decoration: none;
+
+transition: transform 0.3s;
+
+}
+
+.floating-wa:hover { transform: scale(1.1); }
+
+.floating-wa svg { width: 28px; height: 28px; fill: white; }
+
+
+/* Top Announcement Strip */
+
+.top-announce-strip {
+
+background: linear-gradient(90deg, #d4af37, #ffe89c, #d4af37);
+
+color: #400216;
+
+text-align: center;
+
+font-size: 0.85rem;
+
+font-weight: bold;
+
+padding: 6px 10px;
+
+letter-spacing: 0.5px;
+
+}
+
+
+/* Header */
+
+header {
+
+position: relative;
+
+background: linear-gradient(135deg, var(--dark-burgundy), var(--primary-burgundy));
+
+color: #ffffff;
+
+padding: 1.5rem 1rem 1.8rem 1rem;
+
+text-align: center;
+
+border-bottom: 3px solid var(--gold-main);
+
+box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+
+}
+
+
+.header-top { position: absolute; top: 15px; right: 15px; }
+
+.lang-btn {
+
+background: linear-gradient(45deg, var(--gold-light), var(--gold-main));
+
+color: var(--dark-burgundy);
+
+border: none;
+
+padding: 6px 16px;
+
+border-radius: 20px;
+
+cursor: pointer;
+
+font-weight: 700;
+
+font-size: 0.8rem;
+
+box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+
+}
+
+
+.logo-container { width: 75px; height: 75px; margin: 0 auto 5px auto; }
+
+.logo-title { font-family: 'Georgia', serif; font-size: 1.6rem; font-weight: bold; color: var(--gold-light); letter-spacing: 1.5px; }
+
+.tagline { font-size: 0.88rem; color: var(--gold-glow); font-style: italic; margin-top: 2px; opacity: 0.95; }
+
+
+.container { max-width: 850px; margin: 1.5rem auto; padding: 0 1rem; }
+
+/* Cards & Reveal Animation */
+
+.card { 
+
+background: var(--card-bg); 
+
+border-radius: 16px; 
+
+padding: 1.4rem; 
+
+margin-bottom: 1.5rem; 
+
+border: 1px solid rgba(212, 175, 55, 0.2); 
+
+box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04); 
+
+opacity: 0; 
+
+transform: translateY(20px);
+
+transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+
+}
+
+.card.visible { opacity: 1; transform: translateY(0); }
+
+.card h2 { font-family: 'Georgia', serif; color: var(--primary-burgundy); border-bottom: 2px solid var(--gold-light); padding-bottom: 0.5rem; margin-bottom: 1.2rem; font-size: 1.25rem; }
+
+
+/* Auto-Slide Wrappers */
+
+.scroll-wrapper { 
+
+display: flex; 
+
+overflow-x: auto; 
+
+gap: 14px; 
+
+padding-bottom: 8px; 
+
+scrollbar-width: none; /* Hide scrollbar for smooth auto slide */
+
+}
+
+.scroll-wrapper::-webkit-scrollbar { display: none; }
+
+
+.gallery-card { flex: 0 0 220px; height: 180px; border-radius: 12px; border: 1px solid var(--gold-light); overflow: hidden; }
+
+.gallery-card img { width: 100%; height: 100%; object-fit: cover; }
+
+
+/* Offer Banner above Services */
+
+.service-offer-banner {
+
+background: linear-gradient(135deg, #6b0526, #a10d3e);
+
+color: #ffe89c;
+
+border: 2px solid var(--gold-main);
+
+padding: 12px 15px;
+
+border-radius: 12px;
+
+text-align: center;
+
+font-weight: bold;
+
+font-size: 1rem;
+
+margin-bottom: 15px;
+
+box-shadow: 0 4px 12px rgba(107, 5, 38, 0.25);
+
+animation: pulseOffer 2s infinite ease-in-out;
+
+}
+
+@keyframes pulseOffer {
+
+0% { transform: scale(1); }
+
+50% { transform: scale(1.02); }
+
+100% { transform: scale(1); }
+
+}
+
+
+/* Services Grid */
+
+.service-grid {
+
+display: grid;
+
+grid-template-columns: repeat(2, 1fr);
+
+gap: 12px;
+
+}
+
+@media (min-width: 600px) {
+
+.service-grid { grid-template-columns: repeat(3, 1fr); }
+
+}
+
+
+.service-card {
+
+background: #fff;
+
+border-radius: 12px;
+
+overflow: hidden;
+
+border: 1px solid #eee;
+
+box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+
+transition: 0.2s;
+
+text-align: center;
+
+}
+
+.service-card:hover { transform: scale(1.03); border-color: var(--gold-main); }
+
+.service-card-img { width: 100%; height: 110px; object-fit: cover; border-bottom: 2px solid var(--gold-light); }
+
+.service-card-details { padding: 8px; }
+
+.service-name-card { font-weight: bold; color: var(--text-dark); font-size: 0.85rem; height: 2.2rem; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 5px; }
+
+.price-label { font-size: 0.7rem; color: #777; display: block; }
+
+.offer-price { font-weight: 700; color: var(--primary-burgundy); font-size: 1.1rem; display: block; }
+
+
+/* Reviews */
+
+.review-card { flex: 0 0 240px; background: var(--bg-nude); padding: 1.2rem; border-radius: 12px; border: 1px solid var(--gold-light); text-align: center; }
+
+.review-card img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold-main); margin-bottom: 8px; }
+
+
+/* Form Controls & Info */
+
+.form-group { margin-bottom: 1rem; }
+
+.form-group input { width: 100%; padding: 11px; border: 1px solid #dcd0cb; border-radius: 8px; outline: none; }
+
+.form-group input:focus { border-color: var(--gold-main); }
+
+.submit-btn { background: linear-gradient(135deg, var(--dark-burgundy), var(--primary-burgundy)); color: var(--gold-light); border: 1px solid var(--gold-main); padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; }
+
+
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 0.5rem; }
+
+.info-item { background: var(--bg-nude); padding: 0.9rem 1rem; border-radius: 10px; border-left: 4px solid var(--gold-main); font-size: 0.9rem; }
+
+.info-item a { color:var(--primary-burgundy); font-weight:600; text-decoration:none; }
+
+
+footer { background: var(--dark-burgundy); color: var(--gold-light); text-align: center; padding: 1.5rem 1rem; border-top: 3px solid var(--gold-main); margin-top: 2rem; font-size: 0.9rem; }
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="top-announce-strip" id="topBannerStrip" style="display:none;"></div>
+
+
+<a href="https://wa.me/917979732818" class="floating-wa" target="_blank">
+
+<svg viewBox="0 0 32 32"><path d="M16 2a13 13 0 0 0-11 20l-2 7 7-2a13 13 0 1 0 6-25zm0 24a11 11 0 0 1-5.6-1.5l-.4-.2-4.1 1.1 1.1-4-.3-.5A11 11 0 1 1 16 26zm6-8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a9 9 0 0 1-2.6-1.6 10 10 0 0 1-1.8-2.3c-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5a.4.4 0 0 0 0-.4c0-.2-.7-1.7-.9-2.3s-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.8 6.4 6.4 0 0 0 1.3 3.4 14.6 14.6 0 0 0 5.6 5 18.7 18.7 0 0 0 1.9.7 4.5 4.5 0 0 0 2.1.1 3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.5c-.1-.1-.3-.2-.6-.4z"/></svg>
+
+</a>
+
+
+<header>
+
+<div class="header-top">
+
+<button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+
+</div>
+
+<div class="logo-container">
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 10 100 70" width="100%" height="100%"><defs><linearGradient id="vsSalonGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFE89C" /><stop offset="50%" stop-color="#D4AF37" /><stop offset="100%" stop-color="#A87910" /></linearGradient></defs><g stroke="url(#vsSalonGold)" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="26" r="4.5"/><path d="M 27,30 L 42,72"/><circle cx="58" cy="26" r="4.5"/><path d="M 55,30 L 40,72"/><circle cx="41" cy="51" r="1.5" fill="url(#vsSalonGold)" stroke="none"/><path d="M 80,26 C 64,24 64,48 80,50 C 96,52 62,72 65,76"/><path d="M 77,29 C 67,28 67,46 77,48 C 87,50 67,68 68,73" stroke-width="1.2" opacity="0.7"/><path d="M 51,12 L 53,17 L 58,19 L 53,21 L 51,26 L 49,21 L 44,19 L 49,17 Z" fill="url(#vsSalonGold)" stroke="none"/></g></svg>
+
+</div>
+
+<div class="logo-title" id="siteTitle">V.S GLOW BEAUTY SALON</div>
+
+<div class="tagline" id="taglineText">Aapki Khubsurati, Hamari Pehchan</div>
+
+</header>
+
+
+<div class="container">
+
+<!-- 1. Photo Gallery -->
+
+<div class="card reveal">
+
+<h2 id="galleryHead">✦ फोटो गैलरी</h2>
+
+<div class="scroll-wrapper" id="galleryContainer"></div>
+
+</div>
+
+
+<!-- 2. Services & Rates -->
+
+<div class="card reveal">
+
+<h2 id="servicesHead">✦ सेवाएं और दरें</h2>
+
+<div class="service-offer-banner" id="serviceOfferBanner">
+
+🎉 Special Offer: Hurry Up & Book Your Service Now! 🏃‍♀️
+
+</div>
+
+<div class="service-grid" id="servicesContainer"></div>
+
+</div>
+
+
+<!-- 3. Customer Reviews -->
+
+<div class="card reveal">
+
+<h2 id="reviewsHead">✦ ग्राहक समीक्षाएं</h2>
+
+<div class="scroll-wrapper" id="reviewsContainer"></div>
+
+</div>
+
+
+<!-- 4. Online Booking -->
+
+<div class="card reveal">
+
+<h2 id="bookingHead">✦ ऑनलाइन बुकिंग</h2>
+
+<form onsubmit="submitForm(event)">
+
+<div class="form-group"><input type="text" id="cName" placeholder="नाम" required></div>
+
+<div class="form-group"><input type="tel" id="cPhone" placeholder="नंबर" required></div>
+
+<div class="form-group"><input type="text" id="cService" placeholder="सर्विस का नाम" required></div>
+
+<button type="submit" class="submit-btn" id="btnSubmit">बुक करें</button>
+
+</form>
+
+</div>
+
+
+<!-- 5. Salon Info Grid -->
+
+<div class="card reveal">
+
+<h2 id="salonHead">✦ सैलून की जानकारी</h2>
+
+<div class="info-grid">
+
+<div class="info-item"><strong>Address:</strong> <p id="infoAddr">Donar Gumti, near Oppo service centre, Darbhanga 846004.</p></div>
+
+<div class="info-item"><strong>Timings:</strong> <p id="infoTime">08:00 AM to 10:00 PM (Everyday)</p></div>
+
+<div class="info-item"><strong>Phone:</strong> <p id="infoPhone">7979732818</p></div>
+
+</div>
+
+<h3 style="margin-top: 1.2rem; color: var(--primary-burgundy); font-size:1rem; font-family:'Georgia', serif;">Follow Us:</h3>
+
+<div class="info-grid">
+
+<div class="info-item"><a href="#" id="linkInsta" target="_blank">Instagram Profile</a></div>
+
+<div class="info-item"><a href="#" id="linkFB" target="_blank">Facebook Page</a></div>
+
+<div class="info-item"><a href="#" id="linkMap" target="_blank">Google Maps Location</a></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<p><strong id="footerTitle">V.S GLOW BEAUTY SALON</strong></p>
+
+<p id="footerSub">Donar Gumti, Darbhanga | +91 7979732818</p>
+
+</footer>
+
+
+<script>
+
+let currentLang = 'hi';
+let salonData = {}; // Global variable to hold JSON data
+
+
+const translations = {
+
+hi: {
+
+galleryHead: "✦ फोटो गैलरी",
+
+servicesHead: "✦ सेवाएं और दरें",
+
+reviewsHead: "✦ ग्राहक समीक्षाएं",
+
+bookingHead: "✦ ऑनलाइन बुकिंग",
+
+salonHead: "✦ सैलून की जानकारी",
+
+btnSubmit: "बुक करें",
+
+btnLang: "English",
+
+offerPrice: "ऑफर रेट"
+
+},
+
+en: {
+
+galleryHead: "✦ Photo Gallery",
+
+servicesHead: "✦ Services & Rates",
+
+reviewsHead: "✦ Customer Reviews",
+
+bookingHead: "✦ Online Booking",
+
+salonHead: "✦ Salon Details",
+
+btnSubmit: "Book Now",
+
+btnLang: "हिंदी",
+
+offerPrice: "Offer Price"
+
+}
+
+};
+
+
+function reveal() {
+
+const reveals = document.querySelectorAll('.card');
+
+reveals.forEach(r => {
+
+let windowHeight = window.innerHeight;
+
+let elementTop = r.getBoundingClientRect().top;
+
+if (elementTop < windowHeight - 80) r.classList.add('visible');
+
+});
+
+}
+
+window.addEventListener('scroll', reveal);
+
+
+// Auto-scroll function for Gallery and Reviews
+
+function setupAutoSlide(elementId, speedMs = 30) {
+
+const el = document.getElementById(elementId);
+
+if(!el) return;
+
+let isHovered = false;
+
+el.addEventListener('mouseenter', () => isHovered = true);
+
+el.addEventListener('mouseleave', () => isHovered = false);
+
+
+setInterval(() => {
+
+if(isHovered) return;
+
+// अगर अंत तक पहुँच गए हैं, तो रिसेट करें
+
+if (el.scrollLeft >= (el.scrollWidth - el.clientWidth)) {
+
+el.scrollLeft = 0;
+
+} else {
+
+el.scrollLeft += 1;
+
+}
+
+}, speedMs);
+
+}
+
+
+
+function toggleLanguage() {
+
+currentLang = (currentLang === 'hi') ? 'en' : 'hi';
+
+localStorage.setItem('vsGlowLang', currentLang);
+
+renderData();
+
+}
+
+
+// Load data.json from GitHub Pages instead of localStorage
+
+async function loadData() {
+
+const savedLang = localStorage.getItem('vsGlowLang');
+
+if(savedLang) currentLang = savedLang;
+
+try {
+    const res = await fetch('data.json?v=' + Date.now());
+    if(res.ok) {
+        salonData = await res.json();
+    }
+} catch(e) {
+    console.error("Error loading data.json:", e);
+}
+
+renderData();
+
+}
+
+
+function renderData() {
+
+const t = translations[currentLang];
+
+const data = salonData || {};
+
+// Header & Banner Data
+
+if(data.header) {
+
+if(data.header.title) document.getElementById('siteTitle').innerText = data.header.title;
+
+if(data.header.tagline) document.getElementById('taglineText').innerText = data.header.tagline;
+
+if(data.header.banner) {
+
+const topB = document.getElementById('topBannerStrip');
+
+topB.innerText = data.header.banner;
+
+topB.style.display = 'block';
+
+}
+
+}
+
+
+// Service Section Offer Banner
+
+if(data.serviceBanner) {
+
+document.getElementById('serviceOfferBanner').innerText = data.serviceBanner;
+
+}
+
+
+// Set Titles
+
+document.getElementById('galleryHead').innerText = t.galleryHead;
+
+document.getElementById('servicesHead').innerText = t.servicesHead;
+
+document.getElementById('reviewsHead').innerText = t.reviewsHead;
+
+document.getElementById('bookingHead').innerText = t.bookingHead;
+
+document.getElementById('salonHead').innerText = t.salonHead;
+
+document.getElementById('btnSubmit').innerText = t.btnSubmit;
+
+document.getElementById('langBtn').innerText = t.btnLang;
+
+
+// Load Services
+
+const sBox = document.getElementById('servicesContainer');
+
+const services = data.services || [];
+
+if(services.length === 0) {
+
+sBox.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:#777; padding:20px;">No services available.</p>`;
+
+} else {
+
+sBox.innerHTML = services.map(s => `
+
+<div class="service-card">
+
+<img src="${s.image || 'https://via.placeholder.com/150'}" class="service-card-img" alt="${s.name}" loading="lazy">
+
+<div class="service-card-details">
+
+<div class="service-name-card">${s.name}</div>
+
+<span class="price-label">${t.offerPrice}:</span>
+
+<span class="offer-price">₹${s.price}</span>
+
+</div>
+
+</div>
+
+`).join('');
+
+}
+
+
+// Load Gallery
+
+const photos = data.photos || [];
+
+document.getElementById('galleryContainer').innerHTML = photos.length > 0 
+
+? photos.map(p => `<div class="gallery-card"><img src="${p}" loading="lazy"></div>`).join('')
+
+: `<p style="padding:10px; color:#888;">No photos in gallery.</p>`;
+
+
+// Load Reviews
+
+const reviews = data.reviews || [];
+
+document.getElementById('reviewsContainer').innerHTML = reviews.length > 0
+
+? reviews.map(r => `<div class="review-card"><img src="${r.photo || 'https://via.placeholder.com/60'}"><br><strong>${r.name}</strong><p>"${r.text}"</p></div>`).join('')
+
+: `<p style="padding:10px; color:#888;">No reviews yet.</p>`;
+
+
+// Load Salon Info
+
+if(data.info) {
+
+if(data.info.address) document.getElementById('infoAddr').innerText = data.info.address;
+
+if(data.info.timing) document.getElementById('infoTime').innerText = data.info.timing;
+
+if(data.info.phone) document.getElementById('infoPhone').innerText = data.info.phone;
+
+if(data.info.insta) document.getElementById('linkInsta').href = data.info.insta;
+
+if(data.info.fb) document.getElementById('linkFB').href = data.info.fb;
+
+if(data.info.map) document.getElementById('linkMap').href = data.info.map;
+
+}
+
+
+reveal();
+
+}
+
+
+function submitForm(e) {
+
+e.preventDefault();
+
+const name = document.getElementById('cName').value;
+
+const phone = document.getElementById('cPhone').value;
+
+const svc = document.getElementById('cService').value;
+
+const data = salonData || {};
+
+const waNum = (data.info && data.info.wa) ? data.info.wa : "917979732818";
+
+let msg = `Hello V.S GLOW BEAUTY SALON, New Booking Request:%0A- Name: ${name}%0A- Phone: ${phone}%0A- Service: ${svc}`;
+
+window.open(`https://wa.me/${waNum}?text=${msg}`, '_blank');
+
+}
+
+
+window.onload = function() {
+
+loadData();
+
+setupAutoSlide('galleryContainer', 25);
+
+setupAutoSlide('reviewsContainer', 30);
+
+};
+
+</script>
+
+</body>
+
+</html>
