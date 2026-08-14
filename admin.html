@@ -625,8 +625,19 @@ width: 22px; height: 22px; cursor: pointer; font-size: 11px;
 // यहाँ अपनी GitHub डिटेल्स डालें:
 const GITHUB_USERNAME = "vsglow";
 const GITHUB_REPO = "beauty";
-const GITHUB_TOKEN = ""; // यहाँ अपना टोकन पेस्ट करें
+
+// 🔑 LocalStorage से टोकन उठाएं या नया मांगें
+let GITHUB_TOKEN = localStorage.getItem("my_github_token");
+
+if (!GITHUB_TOKEN) {
+    GITHUB_TOKEN = prompt("कृपया अपना GitHub Personal Access Token दर्ज करें:");
+    if (GITHUB_TOKEN) {
+        localStorage.setItem("my_github_token", GITHUB_TOKEN.trim());
+    }
+}
+
 const BRANCH_NAME = "main";
+
 
 // ==========================================
 
