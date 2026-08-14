@@ -14,7 +14,13 @@
     }
   ],
   "photos": [],
-  "reviews": [],
+  "reviews": [
+    {
+      "name": "Puja Sharma",
+      "text": "Bahut acchi service hai!",
+      "photo": ""
+    }
+  ],
   "info": {
     "address": "Main Road, Near City Center",
     "timing": "10:00 AM - 08:00 PM",
